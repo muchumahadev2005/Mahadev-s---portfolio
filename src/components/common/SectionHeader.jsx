@@ -1,15 +1,17 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-export const SectionHeader = ({ index = '01', category = 'SECTION', title, subtitle }) => {
+export const SectionHeader = ({ index, category, title, subtitle }) => {
   return (
     <div className="mb-6 sm:mb-12">
-      {/* Index & Category Badge */}
-      <div className="flex items-center space-x-2.5 mb-2 sm:mb-3 font-grotesk text-[11px] sm:text-xs uppercase tracking-widest text-accent-cyan font-semibold">
-        <span className="text-accent-violet font-mono font-bold">[{index}]</span>
-        <span className="h-1.5 w-1.5 rounded-full bg-accent-cyan" />
-        <span className="text-slate-400">{category}</span>
-      </div>
+      {/* Index & Category Badge — only shown when index is provided */}
+      {index && (
+        <div className="flex items-center space-x-2.5 mb-2 sm:mb-3 font-grotesk text-[11px] sm:text-xs uppercase tracking-widest text-accent-cyan font-semibold">
+          <span className="text-accent-violet font-mono font-bold">[{index}]</span>
+          <span className="h-1.5 w-1.5 rounded-full bg-accent-cyan" />
+          <span className="text-slate-400">{category}</span>
+        </div>
+      )}
 
       {/* Main Large Sculptural Heading - Sized cleanly for mobile to prevent word breaks */}
       <motion.h2

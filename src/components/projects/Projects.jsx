@@ -59,18 +59,16 @@ export const Projects = () => {
   return (
     <section
       id="projects"
-      className={`relative pt-4 sm:pt-8 pb-4 sm:pb-8 ${isDesktop ? 'overflow-hidden' : 'overflow-x-clip'}`}
+      className={`relative pb-4 sm:pb-8 ${isDesktop ? 'overflow-hidden' : 'overflow-x-clip'}`}
     >
       {/* Container: Pinned Full-viewport on Desktop / Natural Sticky Flow on Mobile */}
       <div
         ref={containerRef}
-        className={isDesktop ? 'h-screen w-full flex flex-col justify-start pt-4 sm:pt-6 overflow-hidden' : 'w-full'}
+        className={isDesktop ? 'h-screen w-full flex flex-col justify-start pt-20 sm:pt-24 overflow-hidden' : 'w-full pt-6'}
       >
         {/* Section Header */}
         <div className="px-4 sm:px-12 max-w-7xl mx-auto w-full mb-3 sm:mb-6">
           <SectionHeader
-            index="02"
-            category="PORTFOLIO"
             title="FEATURED WORK."
             subtitle="Production web applications, voice ledgers, and secure messaging systems."
           />

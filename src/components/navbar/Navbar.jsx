@@ -6,12 +6,13 @@ import { useCursor } from '../../context/CursorContext';
 import { personalData } from '../../data/portfolioData';
 
 const NAV_LINKS = [
-  { name: 'Work', href: '#projects' },
   { name: 'About', href: '#about' },
+  { name: 'Work', href: '#projects' },
   { name: 'Experience', href: '#timeline' },
   { name: 'Skills', href: '#skills' },
   { name: 'Contact', href: '#contact' },
 ];
+
 
 export const Navbar = () => {
   const { setCursor, resetCursor } = useCursor();
@@ -79,7 +80,7 @@ export const Navbar = () => {
           </Magnetic>
 
           {/* Desktop Glassmorphic Nav Pill */}
-          <nav className="hidden md:flex items-center space-x-1 px-3 py-1.5 rounded-full bg-surface/75 border border-white/10 backdrop-blur-xl shadow-glass">
+          <nav className="hidden md:flex items-center gap-0.5 px-2 py-2 rounded-full bg-surface/75 border border-white/10 backdrop-blur-xl shadow-glass">
             {NAV_LINKS.map((link) => {
               const isActive = activeSection === link.href.replace('#', '');
               return (
@@ -92,7 +93,7 @@ export const Navbar = () => {
                     }}
                     onMouseEnter={() => setCursor('pointer')}
                     onMouseLeave={resetCursor}
-                    className={`relative px-4 py-2 text-xs uppercase tracking-widest font-grotesk font-medium transition-colors duration-200 rounded-full ${
+                    className={`relative px-5 py-2 text-xs uppercase tracking-widest font-grotesk font-medium transition-colors duration-200 rounded-full ${
                       isActive ? 'text-white' : 'text-slate-400 hover:text-white'
                     }`}
                   >

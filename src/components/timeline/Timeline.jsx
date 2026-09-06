@@ -1,8 +1,124 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Briefcase, CheckCircle2, Sparkles } from 'lucide-react';
 import SectionHeader from '../common/SectionHeader';
 
+// ─── Experience Data ────────────────────────────────────────────────────────
+const experiences = [
+  {
+    id: 'mern-intern',
+    period: 'Apr 2026 — Jun 2026',
+    badge: 'Full-Stack MERN',
+    role: 'MERN Stack Intern',
+    company: 'SocioClub SuperApp • No Ball Entertainments',
+    Icon: Briefcase,
+    accentColor: 'cyan',
+    achievements: [
+      'Built scalable RESTful APIs and optimized PostgreSQL schemas',
+      'Integrated secure JWT authentication and RBAC permissions',
+      'Developed interactive gamification features for the superapp',
+    ],
+    tags: ['React.js', 'Node.js', 'Express', 'PostgreSQL', 'JWT'],
+  },
+  {
+    id: 'aiml-intern',
+    period: 'Dec 2025 — Feb 2026',
+    badge: 'AICTE Research Lab',
+    role: 'AI/ML Research Intern',
+    company: 'AICTE IDEALab • SRKR Engineering College',
+    Icon: Sparkles,
+    accentColor: 'violet',
+    achievements: [
+      'Engineered fraud detection pipeline resolving dataset class imbalance',
+      'Applied Random Forest algorithms and feature selection benchmarks',
+      'Presented and certified at Technology Centre I-Hub',
+    ],
+    tags: ['Python', 'scikit-learn', 'Pandas', 'Random Forest'],
+  },
+];
+
+// ─── Color Map ───────────────────────────────────────────────────────────────
+const colorMap = {
+  cyan: {
+    pulse: 'bg-accent-cyan',
+    text: 'text-accent-cyan',
+    badge: 'bg-accent-cyan/10 border-accent-cyan/30 text-accent-cyan',
+    border: 'hover:border-accent-cyan/50',
+    glow: 'hover:shadow-glow-cyan',
+    line: 'via-accent-cyan/50',
+    hover: 'group-hover:text-accent-cyan',
+  },
+  violet: {
+    pulse: 'bg-accent-violet',
+    text: 'text-accent-violet',
+    badge: 'bg-accent-violet/10 border-accent-violet/30 text-accent-violet',
+    border: 'hover:border-accent-violet/50',
+    glow: 'hover:shadow-glow-violet',
+    line: 'via-accent-violet/50',
+    hover: 'group-hover:text-accent-violet',
+  },
+};
+
+// ─── Single Experience Card ──────────────────────────────────────────────────
+const ExperienceCard = ({ exp }) => {
+  const c = colorMap[exp.accentColor];
+  return (
+    <div
+      className={`group relative rounded-3xl bg-[#101016] border border-white/10 ${c.border} ${c.glow} p-6 sm:p-8 backdrop-blur-2xl shadow-[0_-16px_36px_rgba(0,0,0,0.92),0_12px_32px_rgba(0,0,0,0.6)] transition-all duration-300 w-full h-full flex flex-col justify-between`}
+    >
+      {/* Top glow line on hover */}
+      <div className={`absolute top-0 left-8 right-8 h-[2px] bg-gradient-to-r from-transparent ${c.line} to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+
+      <div>
+        {/* Top Meta */}
+        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-4 mb-5">
+          <div className="flex items-center space-x-2">
+            <span className={`flex h-2.5 w-2.5 rounded-full ${c.pulse} animate-pulse`} />
+            <span className={`font-mono text-xs uppercase tracking-widest ${c.text} font-bold`}>
+              {exp.period}
+            </span>
+          </div>
+          <span className={`px-3 py-1 rounded-full border text-[11px] font-grotesk font-medium ${c.badge}`}>
+            {exp.badge}
+          </span>
+        </div>
+
+        {/* Role & Company */}
+        <h3 className={`font-syne font-extrabold text-2xl sm:text-3xl text-white ${c.hover} transition-colors`}>
+          {exp.role}
+        </h3>
+        <div className="flex items-center space-x-2 text-slate-300 font-grotesk text-sm font-medium mt-1 mb-5">
+          <exp.Icon size={15} className={`${c.text} flex-shrink-0`} />
+          <span>{exp.company}</span>
+        </div>
+
+        {/* Achievements */}
+        <div className="space-y-2.5 mb-5">
+          {exp.achievements.map((a, i) => (
+            <div key={i} className="flex items-start space-x-2.5">
+              <CheckCircle2 size={15} className="text-accent-emerald flex-shrink-0 mt-0.5" />
+              <span className="text-sm text-slate-300 font-sans">{a}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Tech tags */}
+      <div className="flex flex-wrap gap-1.5 pt-4 border-t border-white/[0.08]">
+        {exp.tags.map((tag) => (
+          <span
+            key={tag}
+            className="px-2.5 py-1 rounded-md bg-white/[0.04] border border-white/[0.08] text-[11px] font-grotesk text-slate-400 group-hover:text-slate-200 transition-colors"
+          >
+            {tag}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+// ─── Main Timeline Component ─────────────────────────────────────────────────
 export const Timeline = () => {
   const sectionRef = useRef(null);
   const [isDesktop, setIsDesktop] = useState(
@@ -15,35 +131,26 @@ export const Timeline = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // 1:1 Direct scroll velocity tracking: moves directly with scroll speed without any spring lag
+  // Desktop scroll-linked animations
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start end', 'end start'],
   });
 
-  // Desktop: -140px / +140px. Mobile: -20px / +20px so text is never cut off
-  const leftOffset = isDesktop ? -140 : -20;
-  const rightOffset = isDesktop ? 140 : 20;
-
-  // Fast, punchy entrance: completes in the first 14% of scroll directly following scroll velocity
-  const leftX = useTransform(scrollYProgress, [0, 0.14, 0.86, 1], [leftOffset, 0, 0, leftOffset]);
-  const rightX = useTransform(scrollYProgress, [0, 0.14, 0.86, 1], [rightOffset, 0, 0, rightOffset]);
-
-  // Subtle layered vertical parallax
-  const leftY = useTransform(scrollYProgress, [0, 0.5, 1], [isDesktop ? 25 : 10, 0, isDesktop ? -25 : -10]);
-  const rightY = useTransform(scrollYProgress, [0, 0.5, 1], [isDesktop ? 35 : 15, 0, isDesktop ? -15 : -10]);
-
-  // Dynamic opacity and scale
+  const leftX  = useTransform(scrollYProgress, [0, 0.14, 0.86, 1], [-140, 0, 0, -140]);
+  const rightX = useTransform(scrollYProgress, [0, 0.14, 0.86, 1], [140, 0, 0, 140]);
+  const leftY  = useTransform(scrollYProgress, [0, 0.5, 1], [25, 0, -25]);
+  const rightY = useTransform(scrollYProgress, [0, 0.5, 1], [35, 0, -15]);
   const opacity = useTransform(scrollYProgress, [0, 0.08, 0.92, 1], [0.5, 1, 1, 0.5]);
-  const scale = useTransform(scrollYProgress, [0, 0.12, 0.88, 1], [0.97, 1, 1, 0.97]);
+  const scale  = useTransform(scrollYProgress, [0, 0.12, 0.88, 1], [0.97, 1, 1, 0.97]);
 
   return (
     <section
       ref={sectionRef}
       id="timeline"
-      className="relative pt-6 sm:pt-10 pb-12 sm:pb-16 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto overflow-hidden select-none"
+      className="relative pt-6 sm:pt-10 pb-12 sm:pb-16 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto overflow-x-hidden"
     >
-      {/* Background Decorative Ambient Glows */}
+      {/* Ambient glows */}
       <div className="absolute top-1/4 left-1/4 w-[450px] h-[450px] bg-accent-violet/10 rounded-full blur-[140px] pointer-events-none -z-10" />
       <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-accent-cyan/10 rounded-full blur-[140px] pointer-events-none -z-10" />
 
@@ -55,134 +162,36 @@ export const Timeline = () => {
         subtitle="Software engineering internships across scalable MERN systems and AICTE research."
       />
 
-      {/* 2-Column Experience Grid with dynamic scroll-linked physics */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 items-stretch">
-        {/* ============================================================ */}
-        {/* 1. SocioClub SuperApp MERN Stack Internship (From Left)       */}
-        {/* ============================================================ */}
-        <motion.div
-          style={{ x: leftX, y: leftY, opacity, scale }}
-          className="group relative rounded-3xl bg-surface-elevated/85 border border-white/10 hover:border-accent-cyan/50 p-6 sm:p-8 backdrop-blur-2xl shadow-glass transition-all duration-300 hover:-translate-y-1.5 hover:shadow-glow-cyan flex flex-col justify-between"
-        >
-          {/* Subtle Top Glowing Line */}
-          <div className="absolute top-0 left-8 right-8 h-[2px] bg-gradient-to-r from-transparent via-accent-cyan/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      {/* ── Desktop: side-by-side animated 2-col grid ── */}
+      {isDesktop && (
+        <div className="grid grid-cols-2 gap-6 sm:gap-8 items-stretch">
+          <motion.div style={{ x: leftX, y: leftY, opacity, scale }} className="h-full">
+            <ExperienceCard exp={experiences[0]} />
+          </motion.div>
+          <motion.div style={{ x: rightX, y: rightY, opacity, scale }} className="h-full">
+            <ExperienceCard exp={experiences[1]} />
+          </motion.div>
+        </div>
+      )}
 
-          <div>
-            {/* Top Meta: Dates & Category Badge */}
-            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-4 mb-5">
-              <div className="flex items-center space-x-2">
-                <span className="flex h-2.5 w-2.5 rounded-full bg-accent-cyan animate-pulse" />
-                <span className="font-mono text-xs uppercase tracking-widest text-accent-cyan font-bold">
-                  Apr 2026 — Jun 2026
-                </span>
-              </div>
-              <span className="px-3 py-1 rounded-full bg-accent-cyan/10 border border-accent-cyan/30 text-[11px] font-grotesk text-accent-cyan font-medium">
-                Full-Stack MERN
-              </span>
+      {/* ── Mobile: sticky stacking overlay cards ── */}
+      {!isDesktop && (
+        <div className="relative flex flex-col pb-4">
+          {experiences.map((exp, idx) => (
+            <div
+              key={exp.id}
+              style={{
+                top: `calc(4.5rem + ${idx * 1.5}rem)`,
+                zIndex: (idx + 1) * 10,
+                marginBottom: idx === experiences.length - 1 ? '0' : '2.5rem',
+              }}
+              className="sticky will-change-transform"
+            >
+              <ExperienceCard exp={exp} />
             </div>
-
-            {/* Role & Company */}
-            <h3 className="font-syne font-extrabold text-2xl sm:text-3xl text-white group-hover:text-accent-cyan transition-colors">
-              MERN Stack Intern
-            </h3>
-            <div className="flex items-center space-x-2 text-slate-300 font-grotesk text-sm font-medium mt-1 mb-4">
-              <Briefcase size={15} className="text-accent-violet flex-shrink-0" />
-              <span>SocioClub SuperApp • No Ball Entertainments</span>
-            </div>
-
-            {/* Concise Impact Points (Theory removed) */}
-            <div className="space-y-2 mb-5">
-              {[
-                'Built scalable RESTful APIs and optimized PostgreSQL schemas',
-                'Integrated secure JWT authentication and RBAC permissions',
-                'Developed interactive gamification features for the superapp',
-              ].map((achievement, idx) => (
-                <div key={idx} className="flex items-start space-x-2.5">
-                  <CheckCircle2 size={15} className="text-accent-emerald flex-shrink-0 mt-0.5" />
-                  <span className="text-xs sm:text-sm text-slate-300 font-sans">
-                    {achievement}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Tech Badges Row */}
-          <div className="flex flex-wrap gap-1.5 pt-3.5 border-t border-white/[0.08]">
-            {['React.js', 'Node.js', 'Express', 'PostgreSQL', 'JWT'].map((tag) => (
-              <span
-                key={tag}
-                className="px-2.5 py-0.5 rounded-md bg-white/[0.04] border border-white/[0.08] text-[11px] font-grotesk text-slate-400 group-hover:text-slate-200 transition-colors"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* ============================================================ */}
-        {/* 2. AICTE IDEALab AI/ML Research Internship (From Right)      */}
-        {/* ============================================================ */}
-        <motion.div
-          style={{ x: rightX, y: rightY, opacity, scale }}
-          className="group relative rounded-3xl bg-surface-elevated/85 border border-white/10 hover:border-accent-violet/50 p-6 sm:p-7 backdrop-blur-2xl shadow-glass transition-all duration-300 hover:-translate-y-1.5 hover:shadow-glow-violet flex flex-col justify-between"
-        >
-          {/* Subtle Top Glowing Line */}
-          <div className="absolute top-0 left-8 right-8 h-[2px] bg-gradient-to-r from-transparent via-accent-violet/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-          <div>
-            {/* Top Meta: Dates & Category Badge */}
-            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-4 mb-5">
-              <div className="flex items-center space-x-2">
-                <span className="flex h-2.5 w-2.5 rounded-full bg-accent-violet animate-pulse" />
-                <span className="font-mono text-xs uppercase tracking-widest text-accent-violet font-bold">
-                  Dec 2025 — Feb 2026
-                </span>
-              </div>
-              <span className="px-3 py-1 rounded-full bg-accent-violet/10 border border-accent-violet/30 text-[11px] font-grotesk text-accent-violet font-medium">
-                AICTE Research Lab
-              </span>
-            </div>
-
-            {/* Role & Company */}
-            <h3 className="font-syne font-extrabold text-2xl sm:text-3xl text-white group-hover:text-accent-violet transition-colors">
-              AI/ML Research Intern
-            </h3>
-            <div className="flex items-center space-x-2 text-slate-300 font-grotesk text-sm font-medium mt-1 mb-4">
-              <Sparkles size={15} className="text-accent-cyan flex-shrink-0" />
-              <span>AICTE IDEALab • SRKR Engineering College</span>
-            </div>
-
-            {/* Concise Impact Points (Theory removed) */}
-            <div className="space-y-2 mb-5">
-              {[
-                'Engineered fraud detection pipeline resolving dataset class imbalance',
-                'Applied Random Forest algorithms and feature selection benchmarks',
-                'Presented and certified at Technology Centre I-Hub',
-              ].map((achievement, idx) => (
-                <div key={idx} className="flex items-start space-x-2.5">
-                  <CheckCircle2 size={15} className="text-accent-emerald flex-shrink-0 mt-0.5" />
-                  <span className="text-xs sm:text-sm text-slate-300 font-sans">
-                    {achievement}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Tech Badges Row */}
-          <div className="flex flex-wrap gap-1.5 pt-3.5 border-t border-white/[0.08]">
-            {['Python', 'scikit-learn', 'Pandas', 'Random Forest'].map((tag) => (
-              <span
-                key={tag}
-                className="px-2.5 py-0.5 rounded-md bg-white/[0.04] border border-white/[0.08] text-[11px] font-grotesk text-slate-400 group-hover:text-slate-200 transition-colors"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-        </motion.div>
-      </div>
+          ))}
+        </div>
+      )}
     </section>
   );
 };
