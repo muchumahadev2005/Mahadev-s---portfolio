@@ -73,9 +73,7 @@ export const Navbar = () => {
               <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-surface-elevated border border-white/10 group-hover:border-accent-violet/60 transition-all duration-300 shadow-glass">
                 <span className="text-gradient-violet font-black">{personalData.initials || 'MM'}</span>
               </span>
-              <span className="hidden sm:inline-block font-medium tracking-tight text-sm text-slate-300 group-hover:text-white transition-colors">
-                muchu<span className="text-accent-violet font-bold">.dev</span>
-              </span>
+              {/* muchu.dev text hidden — MM only */}
             </a>
           </Magnetic>
 
