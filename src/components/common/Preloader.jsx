@@ -75,7 +75,7 @@ export const Preloader = ({ onComplete }) => {
               </motion.div>
             </div>
 
-            <div className="font-syne font-extrabold text-7xl sm:text-9xl tracking-tighter text-white flex items-baseline">
+            <div className="font-grotesk sm:font-syne font-extrabold text-7xl sm:text-9xl tracking-tighter text-white flex items-baseline">
               <span className="tabular-nums">
                 {count < 10 ? `0${count}` : count}
               </span>

@@ -133,7 +133,7 @@ export const Hero = () => {
               variants={dropFromTop}
               initial="hidden"
               animate="visible"
-              className="font-syne font-extrabold text-[clamp(2.35rem,8.5vw,5.5rem)] leading-[0.92] tracking-tight text-white uppercase break-words"
+              className="font-grotesk lg:font-syne font-extrabold text-[clamp(2.85rem,9.5vw,5.5rem)] leading-[0.98] lg:leading-[0.92] tracking-normal uppercase break-words"
             >
               MUCHU
             </motion.div>
@@ -144,7 +144,7 @@ export const Hero = () => {
               variants={dropFromTop}
               initial="hidden"
               animate="visible"
-              className="font-syne font-extrabold text-[clamp(2.35rem,8.5vw,5.5rem)] leading-[0.92] tracking-tight uppercase break-words text-gradient-violet"
+              className="font-grotesk lg:font-syne font-extrabold text-[clamp(2.85rem,9.5vw,5.5rem)] leading-[0.98] lg:leading-[0.92] tracking-normal uppercase break-words text-gradient-violet"
             >
               MAHADEV
             </motion.div>
@@ -156,7 +156,7 @@ export const Hero = () => {
             variants={dropFromTop}
             initial="hidden"
             animate="visible"
-            className="font-syne font-bold text-base sm:text-xl md:text-2xl tracking-wide text-accent-cyan uppercase"
+            className="font-grotesk lg:font-syne font-bold text-base sm:text-lg md:text-xl tracking-wider [word-spacing:0.08em] text-accent-cyan uppercase"
           >
             Software Developer
           </motion.div>

@@ -68,7 +68,7 @@ export const Navbar = () => {
               }}
               onMouseEnter={() => setCursor('pointer', 'TOP')}
               onMouseLeave={resetCursor}
-              className="group flex items-center space-x-2 text-white font-syne font-extrabold text-xl tracking-tighter"
+              className="group flex items-center space-x-2 text-white font-grotesk sm:font-syne font-extrabold text-xl tracking-normal"
             >
               <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-surface-elevated border border-white/10 group-hover:border-accent-violet/60 transition-all duration-300 shadow-glass">
                 <span className="text-gradient-violet font-black">{personalData.initials || 'MM'}</span>
@@ -185,7 +185,7 @@ export const Navbar = () => {
                     e.preventDefault();
                     scrollToSection(link.href);
                   }}
-                  className="flex items-center justify-between text-lg font-syne font-bold text-white hover:text-accent-cyan py-2 transition-colors border-b border-white/[0.05]"
+                  className="flex items-center justify-between text-base font-grotesk font-bold text-white hover:text-accent-cyan py-2.5 transition-colors border-b border-white/[0.05]"
                 >
                   <span>{link.name}</span>
                   <ArrowUpRight size={18} className="text-slate-500" />
@@ -195,7 +195,7 @@ export const Navbar = () => {
               <div className="pt-2">
                 <a
                   href={personalData.resumeUrl}
-                  download="Alex_Vance_Resume.pdf"
+                  download="Muchu_Mahadev_Resume.pdf"
                   className="flex items-center justify-center space-x-2 w-full py-3 rounded-xl bg-accent-violet text-white font-grotesk font-semibold text-sm shadow-glow-violet"
                 >
                   <FileDown size={16} />

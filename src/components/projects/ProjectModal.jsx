@@ -73,7 +73,7 @@ export const ProjectModal = ({ project, isOpen, onClose }) => {
             </div>
 
             {/* Title */}
-            <h3 className="font-syne text-3xl sm:text-5xl font-extrabold text-white tracking-tight mb-4">
+            <h3 className="font-grotesk sm:font-syne text-2xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-normal [word-spacing:0.08em] mb-4 leading-tight">
               {project.title}
             </h3>
 
@@ -98,7 +98,7 @@ export const ProjectModal = ({ project, isOpen, onClose }) => {
             {/* Description & Technical Deep Dive */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
               <div className="md:col-span-2 space-y-4">
-                <h4 className="font-syne font-bold text-lg text-white">
+                <h4 className="font-grotesk sm:font-syne font-bold text-lg text-white">
                   Architectural Overview
                 </h4>
                 <p className="text-slate-300 font-sans leading-relaxed text-sm sm:text-base font-light">
@@ -108,7 +108,7 @@ export const ProjectModal = ({ project, isOpen, onClose }) => {
 
               {/* Technologies List */}
               <div className="space-y-3">
-                <h4 className="font-syne font-bold text-sm text-slate-400 uppercase tracking-wider">
+                <h4 className="font-grotesk sm:font-syne font-bold text-sm text-slate-400 uppercase tracking-wider">
                   Technology Stack
                 </h4>
                 <div className="flex flex-wrap gap-2">

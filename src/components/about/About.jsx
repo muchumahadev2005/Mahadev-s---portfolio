@@ -67,7 +67,7 @@ export const About = () => {
               <Terminal size={14} />
               <span>Full-Stack & Systems Engineering</span>
             </div>
-            <p className="font-syne text-base sm:text-lg text-white font-medium leading-relaxed">
+            <p className="font-grotesk sm:font-syne text-lg sm:text-lg md:text-xl text-white font-medium leading-relaxed">
               Crafting high-throughput backend services and secure web applications. Focused on Node.js microservices, relational PostgreSQL schemas, and modern React interfaces with AI-integrated workflows.
             </p>
           </div>
@@ -103,7 +103,7 @@ export const About = () => {
               >
                 <pillar.icon size={20} className={`${pillar.color} mb-2.5`} />
                 <div>
-                  <h4 className="font-syne font-bold text-white text-sm mb-1">
+                  <h4 className="font-grotesk sm:font-syne font-bold text-white text-sm mb-1">
                     {pillar.title}
                   </h4>
                   <p className="text-[11px] text-slate-400 leading-relaxed font-sans">
@@ -122,7 +122,7 @@ export const About = () => {
                   <GraduationCap size={18} />
                 </div>
                 <div>
-                  <h4 className="font-syne font-bold text-white text-sm sm:text-base">
+                  <h4 className="font-grotesk sm:font-syne font-bold text-white text-sm sm:text-base">
                     B.Tech in Computer Science & Engineering (Design)
                   </h4>
                   <p className="text-xs text-slate-400 font-grotesk">
@@ -193,7 +193,7 @@ export const About = () => {
               {/* Floating Bottom Label */}
               <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
                 <div>
-                  <div className="font-syne font-bold text-white text-base tracking-tight">
+                  <div className="font-grotesk sm:font-syne font-bold text-white text-base tracking-normal">
                     {personalData.name}
                   </div>
                   <div className="font-grotesk text-[11px] text-accent-cyan">

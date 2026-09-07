@@ -102,7 +102,7 @@ export const Contact = () => {
             <div className="flex items-center justify-between gap-4">
               <a
                 href={`mailto:${personalData.email}`}
-                className="font-syne font-bold text-base sm:text-lg text-white hover:text-accent-cyan transition-colors truncate"
+                className="font-grotesk sm:font-syne font-bold text-base sm:text-base md:text-lg text-white hover:text-accent-cyan transition-colors truncate"
               >
                 {personalData.email}
               </a>
@@ -129,7 +129,7 @@ export const Contact = () => {
               <div className="flex items-center justify-between gap-4">
                 <a
                   href={`tel:${personalData.phone.replace(/\s+/g, '')}`}
-                  className="font-syne font-bold text-base sm:text-lg text-white hover:text-accent-emerald transition-colors"
+                  className="font-grotesk sm:font-syne font-bold text-base sm:text-base md:text-lg text-white hover:text-accent-emerald transition-colors"
                 >
                   {personalData.phone}
                 </a>
@@ -169,7 +169,7 @@ export const Contact = () => {
           {/* Resume / CV Direct Download Card */}
           <div className="p-6 sm:p-8 rounded-3xl bg-surface-elevated/60 border border-accent-violet/30 backdrop-blur-xl flex items-center justify-between gap-4 group">
             <div>
-              <h4 className="font-syne font-bold text-white text-base">
+              <h4 className="font-grotesk sm:font-syne font-bold text-white text-base">
                 Curriculum Vitae
               </h4>
               <p className="text-xs text-slate-400 font-grotesk mt-0.5">

@@ -45,11 +45,11 @@ export const Counter = ({ targetValue, suffix = '', duration = 1.8, label }) => 
 
   return (
     <div ref={ref} className="flex flex-col">
-      <div className="flex items-baseline font-syne font-extrabold text-4xl sm:text-5xl md:text-6xl text-white">
+      <div className="flex items-baseline font-grotesk sm:font-syne font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white">
         <span className="tabular-nums">{count}</span>
-        <span className="text-accent-cyan ml-1 text-3xl sm:text-4xl">{suffix}</span>
+        <span className="text-accent-cyan ml-1 text-2xl sm:text-3xl md:text-4xl">{suffix}</span>
       </div>
-      <div className="mt-2 text-xs uppercase tracking-widest font-grotesk text-slate-400 font-medium">
+      <div className="mt-1.5 text-xs uppercase tracking-widest font-grotesk text-slate-400 font-medium">
         {label}
       </div>
     </div>

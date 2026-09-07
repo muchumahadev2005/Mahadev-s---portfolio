@@ -44,7 +44,7 @@ export const MarqueeRow = ({ items, reverse = false, speed = '30s', onSelectSkil
                     : 'bg-accent-violet group-hover:bg-accent-cyan'
                 }`}
               />
-              <span className="font-syne font-bold text-sm sm:text-base uppercase tracking-wider whitespace-nowrap">
+              <span className="font-grotesk sm:font-syne font-bold text-xs sm:text-sm md:text-base uppercase tracking-wider whitespace-nowrap">
                 {item}
               </span>
               {isSelected && (

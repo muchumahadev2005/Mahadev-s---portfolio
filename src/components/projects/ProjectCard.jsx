@@ -87,7 +87,7 @@ export const ProjectCard = ({ project, index, onSelect, isStacked = false }) => 
         <>
           {/* Title — color changes on hover/touch via isHovered state */}
           <h3
-            className="font-syne font-extrabold text-xl sm:text-2xl transition-colors duration-300 flex items-center justify-between mb-2"
+            className="font-grotesk sm:font-syne font-bold sm:font-extrabold text-xl sm:text-xl md:text-2xl tracking-normal [word-spacing:0.06em] transition-colors duration-300 flex items-center justify-between mb-2 leading-snug"
             style={{ color: isHovered ? '#06B6D4' : '#ffffff' }}
           >
             <span>{project.title}</span>

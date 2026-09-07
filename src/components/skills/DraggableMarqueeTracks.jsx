@@ -103,7 +103,7 @@ export const DraggableMarqueeTracks = ({
         style={{ touchAction: 'none' }}
       >
         <span className="w-1.5 h-1.5 rounded-full bg-accent-violet group-hover:bg-accent-cyan transition-colors flex-shrink-0" />
-        <span className="font-syne font-bold text-sm sm:text-base uppercase tracking-wider whitespace-nowrap">
+        <span className="font-grotesk sm:font-syne font-bold text-xs sm:text-sm md:text-base uppercase tracking-wider whitespace-nowrap">
           {item}
         </span>
       </div>
@@ -154,7 +154,7 @@ export const DraggableMarqueeTracks = ({
             className="flex items-center space-x-3 px-6 py-3 rounded-2xl bg-surface-elevated/95 border border-accent-cyan shadow-[0_0_30px_rgba(6,182,212,0.85)] text-white backdrop-blur-2xl scale-110 rotate-2 select-none cursor-grabbing"
           >
             <span className="w-2 h-2 rounded-full bg-accent-cyan shadow-[0_0_8px_#06B6D4] animate-pulse flex-shrink-0" />
-            <span className="font-syne font-bold text-sm sm:text-base uppercase tracking-wider whitespace-nowrap text-white">
+            <span className="font-grotesk sm:font-syne font-bold text-xs sm:text-sm md:text-base uppercase tracking-wider whitespace-nowrap text-white">
               {draggedSkill.name}
             </span>
           </div>,

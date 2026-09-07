@@ -74,7 +74,7 @@ const ExperienceCard = ({ exp, index, total }) => {
   const c = colorMap[exp.accentColor];
   return (
     <div
-      className={`group relative rounded-3xl bg-[#0d0d14] border border-white/10 ${c.border} ${c.glow} p-6 sm:p-10 backdrop-blur-2xl shadow-[0_-20px_48px_rgba(0,0,0,0.92),0_24px_48px_rgba(0,0,0,0.85)] transition-all duration-300 w-full`}
+      className={`group relative rounded-3xl bg-[#0d0d14] border border-white/10 ${c.border} ${c.glow} p-5 sm:p-8 md:p-10 backdrop-blur-2xl shadow-[0_-20px_48px_rgba(0,0,0,0.92),0_24px_48px_rgba(0,0,0,0.85)] transition-all duration-300 w-full`}
     >
       {/* Top glow line on hover */}
       <div
@@ -82,69 +82,66 @@ const ExperienceCard = ({ exp, index, total }) => {
       />
 
       {/* Top Meta Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-4 sm:pb-5 mb-5 sm:mb-6">
-        <div className="flex items-center space-x-3">
+      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3 sm:pb-4 mb-4 sm:mb-5">
+        <div className="flex items-center space-x-2.5">
           <span className="font-mono text-xs text-slate-500 font-bold tracking-wider">
             {exp.num} / {String(total).padStart(2, '0')}
           </span>
           <span className="text-white/20">•</span>
           <div className="flex items-center space-x-2">
-            <span className={`flex h-2.5 w-2.5 rounded-full ${c.pulse} animate-pulse`} />
+            <span className={`flex h-2 w-2 rounded-full ${c.pulse} animate-pulse`} />
             <span className={`font-mono text-xs uppercase tracking-widest ${c.text} font-bold`}>
               {exp.period}
             </span>
           </div>
         </div>
-        <span className={`px-3 py-1 rounded-full border text-xs font-grotesk font-medium ${c.badge}`}>
+        <span className={`px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full border text-[11px] sm:text-xs font-grotesk font-medium ${c.badge}`}>
           {exp.badge}
         </span>
       </div>
 
       {/* Role & Company Details */}
-      <div className="mb-5">
-        <h3 className={`font-syne font-extrabold text-2xl sm:text-3xl text-white ${c.hover} transition-colors tracking-tight`}>
+      <div className="mb-3.5 sm:mb-5">
+        <h3 className={`font-grotesk sm:font-syne font-bold sm:font-extrabold text-xl sm:text-2xl md:text-3xl text-white ${c.hover} transition-colors tracking-normal [word-spacing:0.06em] leading-snug`}>
           {exp.role}
         </h3>
-        <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-slate-300 font-grotesk text-sm font-medium mt-1.5">
-          <div className="flex items-center space-x-2">
-            <exp.Icon size={16} className={`${c.text} flex-shrink-0`} />
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-slate-300 font-grotesk text-xs sm:text-sm font-medium mt-1">
+          <div className="flex items-center space-x-1.5">
+            <exp.Icon size={15} className={`${c.text} flex-shrink-0`} />
             <span className="text-slate-200">{exp.company}</span>
           </div>
           {exp.location && (
             <div className="flex items-center space-x-1 text-slate-400 text-xs">
-              <MapPin size={13} className="text-slate-500 flex-shrink-0" />
+              <MapPin size={12} className="text-slate-500 flex-shrink-0" />
               <span>{exp.location}</span>
             </div>
           )}
         </div>
       </div>
 
-      {/* Description Summary */}
+      {/* Description Summary — shown on desktop only to avoid wall of text on mobile */}
       {exp.description && (
-        <p className="text-sm text-slate-300/90 font-sans leading-relaxed mb-5">
+        <p className="hidden sm:block text-sm text-slate-300/90 font-sans leading-relaxed mb-4">
           {exp.description}
         </p>
       )}
 
-      {/* Key Achievements */}
-      <div className="space-y-2.5 mb-6">
-        <h4 className="font-mono text-[11px] uppercase tracking-wider text-slate-400 font-semibold mb-2">
-          Key Contributions & Impact
-        </h4>
+      {/* Key Achievements — compact bullet points */}
+      <div className="space-y-2 mb-4 sm:mb-5">
         {exp.achievements.map((item, i) => (
           <div key={i} className="flex items-start space-x-2.5">
-            <CheckCircle2 size={16} className="text-accent-emerald flex-shrink-0 mt-0.5" />
-            <span className="text-sm text-slate-300 font-sans leading-normal">{item}</span>
+            <CheckCircle2 size={15} className="text-accent-emerald flex-shrink-0 mt-0.5" />
+            <span className="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed">{item}</span>
           </div>
         ))}
       </div>
 
       {/* Tech tags */}
-      <div className="flex flex-wrap gap-2 pt-4 border-t border-white/[0.08]">
+      <div className="flex flex-wrap gap-1.5 sm:gap-2 pt-3 sm:pt-4 border-t border-white/[0.08]">
         {exp.tags.map((tag) => (
           <span
             key={tag}
-            className="px-3 py-1 rounded-lg bg-white/[0.04] border border-white/[0.08] text-xs font-grotesk text-slate-300 group-hover:text-white transition-colors"
+            className="px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-md sm:rounded-lg bg-white/[0.04] border border-white/[0.08] text-[11px] sm:text-xs font-grotesk text-slate-300 group-hover:text-white transition-colors"
           >
             {tag}
           </span>

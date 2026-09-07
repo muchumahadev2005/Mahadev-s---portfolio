@@ -110,7 +110,7 @@ export const Testimonials = () => {
               </div>
 
               {/* Quote Text */}
-              <p className="font-syne text-lg sm:text-2xl md:text-3xl text-white font-medium leading-relaxed">
+              <p className="font-grotesk sm:font-syne text-lg sm:text-xl md:text-2xl lg:text-3xl text-slate-100 sm:text-white font-medium leading-relaxed">
                 "{current.quote}"
               </p>
 
@@ -122,7 +122,7 @@ export const Testimonials = () => {
                   className="w-14 h-14 rounded-2xl object-cover border border-white/20"
                 />
                 <div>
-                  <div className="font-syne font-bold text-lg text-white">
+                  <div className="font-grotesk sm:font-syne font-bold text-base sm:text-lg text-white">
                     {current.author}
                   </div>
                   <div className="font-grotesk text-xs uppercase tracking-wider text-accent-cyan">

@@ -18,18 +18,18 @@ export const Footer = () => {
         <div className="flex w-max space-x-8 animate-marquee">
           {[...Array(4)].map((_, idx) => (
             <div key={idx} className="flex items-center space-x-8 text-white/20 whitespace-nowrap">
-              <span className="font-syne font-extrabold text-4xl sm:text-6xl uppercase tracking-tighter hover:text-white transition-colors duration-300">
+              <span className="font-grotesk sm:font-syne font-extrabold text-3xl sm:text-5xl md:text-6xl uppercase tracking-normal [word-spacing:0.12em] hover:text-white transition-colors duration-300">
                 MUCHU MAHADEV
               </span>
-              <span className="text-accent-violet text-3xl">✦</span>
-              <span className="font-syne font-extrabold text-4xl sm:text-6xl uppercase tracking-tighter hover:text-accent-cyan transition-colors duration-300">
+              <span className="text-accent-violet text-2xl sm:text-3xl">✦</span>
+              <span className="font-grotesk sm:font-syne font-extrabold text-3xl sm:text-5xl md:text-6xl uppercase tracking-normal [word-spacing:0.12em] hover:text-accent-cyan transition-colors duration-300">
                 SOFTWARE DEVELOPER
               </span>
-              <span className="text-accent-cyan text-3xl">✦</span>
-              <span className="font-syne font-extrabold text-4xl sm:text-6xl uppercase tracking-tighter hover:text-accent-emerald transition-colors duration-300">
+              <span className="text-accent-cyan text-2xl sm:text-3xl">✦</span>
+              <span className="font-grotesk sm:font-syne font-extrabold text-3xl sm:text-5xl md:text-6xl uppercase tracking-normal [word-spacing:0.12em] hover:text-accent-emerald transition-colors duration-300">
                 FULL-STACK & SYSTEMS
               </span>
-              <span className="text-accent-violet text-3xl">✦</span>
+              <span className="text-accent-violet text-2xl sm:text-3xl">✦</span>
             </div>
           ))}
         </div>
@@ -39,7 +39,7 @@ export const Footer = () => {
       <div className="max-w-7xl mx-auto px-6 sm:px-12 flex flex-col md:flex-row items-center justify-between gap-8">
         {/* Left: Brand Monogram & Copyright */}
         <div className="flex flex-col items-center md:items-start space-y-2 text-center md:text-left">
-          <div className="flex items-center space-x-2 font-syne font-bold text-xl text-white">
+          <div className="flex items-center space-x-2 font-grotesk sm:font-syne font-bold text-lg sm:text-xl text-white">
             <span className="w-3 h-3 rounded-full bg-accent-violet" />
             <span>{personalData.name}</span>
           </div>
