@@ -1,39 +1,47 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { Briefcase, CheckCircle2, Sparkles } from 'lucide-react';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Briefcase, CheckCircle2, Sparkles, MapPin } from 'lucide-react';
 import SectionHeader from '../common/SectionHeader';
 
 // ─── Experience Data ────────────────────────────────────────────────────────
 const experiences = [
   {
     id: 'mern-intern',
+    num: '01',
     period: 'Apr 2026 — Jun 2026',
     badge: 'Full-Stack MERN',
     role: 'MERN Stack Intern',
     company: 'SocioClub SuperApp • No Ball Entertainments',
+    location: 'Remote Internship',
+    description:
+      'Developed scalable full-stack applications using React.js, Node.js, Express.js, and PostgreSQL for an expansive children’s learning and superapp ecosystem.',
     Icon: Briefcase,
     accentColor: 'cyan',
     achievements: [
-      'Built scalable RESTful APIs and optimized PostgreSQL schemas',
-      'Integrated secure JWT authentication and RBAC permissions',
-      'Developed interactive gamification features for the superapp',
+      'Built scalable RESTful APIs, backend microservices, and optimized PostgreSQL schemas',
+      'Integrated secure JWT authentication and Role-Based Access Control (RBAC) permissions',
+      'Developed interactive gamification features and AI-assisted workflows for the superapp',
     ],
-    tags: ['React.js', 'Node.js', 'Express', 'PostgreSQL', 'JWT'],
+    tags: ['React.js', 'Node.js', 'Express.js', 'PostgreSQL', 'JWT', 'RBAC', 'REST APIs'],
   },
   {
     id: 'aiml-intern',
+    num: '02',
     period: 'Dec 2025 — Feb 2026',
     badge: 'AICTE Research Lab',
     role: 'AI/ML Research Intern',
     company: 'AICTE IDEALab • SRKR Engineering College',
+    location: 'Research Lab • Bhimavaram',
+    description:
+      'Engineered an intelligent credit card fraud detection pipeline through 2 iterative development stages utilizing scikit-learn, Pandas, and feature engineering.',
     Icon: Sparkles,
     accentColor: 'violet',
     achievements: [
-      'Engineered fraud detection pipeline resolving dataset class imbalance',
-      'Applied Random Forest algorithms and feature selection benchmarks',
-      'Presented and certified at Technology Centre I-Hub',
+      'Engineered fraud detection pipeline resolving severe dataset class imbalance via SMOTE',
+      'Applied Random Forest algorithms and benchmarked ROC-AUC and precision-recall metrics',
+      'Presented and certified at Technology Centre I-Hub to faculty and industry evaluators',
     ],
-    tags: ['Python', 'scikit-learn', 'Pandas', 'Random Forest'],
+    tags: ['Python', 'scikit-learn', 'Pandas', 'Random Forest', 'Machine Learning', 'Data Science'],
   },
 ];
 
@@ -45,8 +53,9 @@ const colorMap = {
     badge: 'bg-accent-cyan/10 border-accent-cyan/30 text-accent-cyan',
     border: 'hover:border-accent-cyan/50',
     glow: 'hover:shadow-glow-cyan',
-    line: 'via-accent-cyan/50',
+    line: 'via-accent-cyan/60',
     hover: 'group-hover:text-accent-cyan',
+    chip: 'bg-accent-cyan/10 border-accent-cyan/20 text-accent-cyan',
   },
   violet: {
     pulse: 'bg-accent-violet',
@@ -54,61 +63,88 @@ const colorMap = {
     badge: 'bg-accent-violet/10 border-accent-violet/30 text-accent-violet',
     border: 'hover:border-accent-violet/50',
     glow: 'hover:shadow-glow-violet',
-    line: 'via-accent-violet/50',
+    line: 'via-accent-violet/60',
     hover: 'group-hover:text-accent-violet',
+    chip: 'bg-accent-violet/10 border-accent-violet/20 text-accent-violet',
   },
 };
 
 // ─── Single Experience Card ──────────────────────────────────────────────────
-const ExperienceCard = ({ exp }) => {
+const ExperienceCard = ({ exp, index, total }) => {
   const c = colorMap[exp.accentColor];
   return (
     <div
-      className={`group relative rounded-3xl bg-[#101016] border border-white/10 ${c.border} ${c.glow} p-6 sm:p-8 backdrop-blur-2xl shadow-[0_-16px_36px_rgba(0,0,0,0.92),0_12px_32px_rgba(0,0,0,0.6)] transition-all duration-300 w-full h-full flex flex-col justify-between`}
+      className={`group relative rounded-3xl bg-[#0d0d14] border border-white/10 ${c.border} ${c.glow} p-6 sm:p-10 backdrop-blur-2xl shadow-[0_-20px_48px_rgba(0,0,0,0.92),0_24px_48px_rgba(0,0,0,0.85)] transition-all duration-300 w-full`}
     >
       {/* Top glow line on hover */}
-      <div className={`absolute top-0 left-8 right-8 h-[2px] bg-gradient-to-r from-transparent ${c.line} to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+      <div
+        className={`absolute top-0 left-8 right-8 h-[2px] bg-gradient-to-r from-transparent ${c.line} to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
+      />
 
-      <div>
-        {/* Top Meta */}
-        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-4 mb-5">
+      {/* Top Meta Bar */}
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-4 sm:pb-5 mb-5 sm:mb-6">
+        <div className="flex items-center space-x-3">
+          <span className="font-mono text-xs text-slate-500 font-bold tracking-wider">
+            {exp.num} / {String(total).padStart(2, '0')}
+          </span>
+          <span className="text-white/20">•</span>
           <div className="flex items-center space-x-2">
             <span className={`flex h-2.5 w-2.5 rounded-full ${c.pulse} animate-pulse`} />
             <span className={`font-mono text-xs uppercase tracking-widest ${c.text} font-bold`}>
               {exp.period}
             </span>
           </div>
-          <span className={`px-3 py-1 rounded-full border text-[11px] font-grotesk font-medium ${c.badge}`}>
-            {exp.badge}
-          </span>
         </div>
+        <span className={`px-3 py-1 rounded-full border text-xs font-grotesk font-medium ${c.badge}`}>
+          {exp.badge}
+        </span>
+      </div>
 
-        {/* Role & Company */}
-        <h3 className={`font-syne font-extrabold text-2xl sm:text-3xl text-white ${c.hover} transition-colors`}>
+      {/* Role & Company Details */}
+      <div className="mb-5">
+        <h3 className={`font-syne font-extrabold text-2xl sm:text-3xl text-white ${c.hover} transition-colors tracking-tight`}>
           {exp.role}
         </h3>
-        <div className="flex items-center space-x-2 text-slate-300 font-grotesk text-sm font-medium mt-1 mb-5">
-          <exp.Icon size={15} className={`${c.text} flex-shrink-0`} />
-          <span>{exp.company}</span>
-        </div>
-
-        {/* Achievements */}
-        <div className="space-y-2.5 mb-5">
-          {exp.achievements.map((a, i) => (
-            <div key={i} className="flex items-start space-x-2.5">
-              <CheckCircle2 size={15} className="text-accent-emerald flex-shrink-0 mt-0.5" />
-              <span className="text-sm text-slate-300 font-sans">{a}</span>
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-slate-300 font-grotesk text-sm font-medium mt-1.5">
+          <div className="flex items-center space-x-2">
+            <exp.Icon size={16} className={`${c.text} flex-shrink-0`} />
+            <span className="text-slate-200">{exp.company}</span>
+          </div>
+          {exp.location && (
+            <div className="flex items-center space-x-1 text-slate-400 text-xs">
+              <MapPin size={13} className="text-slate-500 flex-shrink-0" />
+              <span>{exp.location}</span>
             </div>
-          ))}
+          )}
         </div>
       </div>
 
+      {/* Description Summary */}
+      {exp.description && (
+        <p className="text-sm text-slate-300/90 font-sans leading-relaxed mb-5">
+          {exp.description}
+        </p>
+      )}
+
+      {/* Key Achievements */}
+      <div className="space-y-2.5 mb-6">
+        <h4 className="font-mono text-[11px] uppercase tracking-wider text-slate-400 font-semibold mb-2">
+          Key Contributions & Impact
+        </h4>
+        {exp.achievements.map((item, i) => (
+          <div key={i} className="flex items-start space-x-2.5">
+            <CheckCircle2 size={16} className="text-accent-emerald flex-shrink-0 mt-0.5" />
+            <span className="text-sm text-slate-300 font-sans leading-normal">{item}</span>
+          </div>
+        ))}
+      </div>
+
       {/* Tech tags */}
-      <div className="flex flex-wrap gap-1.5 pt-4 border-t border-white/[0.08]">
+      <div className="flex flex-wrap gap-2 pt-4 border-t border-white/[0.08]">
         {exp.tags.map((tag) => (
           <span
             key={tag}
-            className="px-2.5 py-1 rounded-md bg-white/[0.04] border border-white/[0.08] text-[11px] font-grotesk text-slate-400 group-hover:text-slate-200 transition-colors"
+            className="px-3 py-1 rounded-lg bg-white/[0.04] border border-white/[0.08] text-xs font-grotesk text-slate-300 group-hover:text-white transition-colors"
           >
             {tag}
           </span>
@@ -120,37 +156,12 @@ const ExperienceCard = ({ exp }) => {
 
 // ─── Main Timeline Component ─────────────────────────────────────────────────
 export const Timeline = () => {
-  const sectionRef = useRef(null);
-  const [isDesktop, setIsDesktop] = useState(
-    typeof window !== 'undefined' ? window.innerWidth >= 1024 : true
-  );
-
-  useEffect(() => {
-    const handleResize = () => setIsDesktop(window.innerWidth >= 1024);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  // Desktop scroll-linked animations
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start end', 'end start'],
-  });
-
-  const leftX  = useTransform(scrollYProgress, [0, 0.14, 0.86, 1], [-140, 0, 0, -140]);
-  const rightX = useTransform(scrollYProgress, [0, 0.14, 0.86, 1], [140, 0, 0, 140]);
-  const leftY  = useTransform(scrollYProgress, [0, 0.5, 1], [25, 0, -25]);
-  const rightY = useTransform(scrollYProgress, [0, 0.5, 1], [35, 0, -15]);
-  const opacity = useTransform(scrollYProgress, [0, 0.08, 0.92, 1], [0.5, 1, 1, 0.5]);
-  const scale  = useTransform(scrollYProgress, [0, 0.12, 0.88, 1], [0.97, 1, 1, 0.97]);
-
   return (
     <section
-      ref={sectionRef}
       id="timeline"
-      className="relative pt-6 sm:pt-10 pb-12 sm:pb-16 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto overflow-x-hidden"
+      className="relative pt-8 sm:pt-12 pb-16 sm:pb-24 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto overflow-x-clip"
     >
-      {/* Ambient glows */}
+      {/* Ambient background glow accents */}
       <div className="absolute top-1/4 left-1/4 w-[450px] h-[450px] bg-accent-violet/10 rounded-full blur-[140px] pointer-events-none -z-10" />
       <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-accent-cyan/10 rounded-full blur-[140px] pointer-events-none -z-10" />
 
@@ -162,36 +173,22 @@ export const Timeline = () => {
         subtitle="Software engineering internships across scalable MERN systems and AICTE research."
       />
 
-      {/* ── Desktop: side-by-side animated 2-col grid ── */}
-      {isDesktop && (
-        <div className="grid grid-cols-2 gap-6 sm:gap-8 items-stretch">
-          <motion.div style={{ x: leftX, y: leftY, opacity, scale }} className="h-full">
-            <ExperienceCard exp={experiences[0]} />
-          </motion.div>
-          <motion.div style={{ x: rightX, y: rightY, opacity, scale }} className="h-full">
-            <ExperienceCard exp={experiences[1]} />
-          </motion.div>
-        </div>
-      )}
-
-      {/* ── Mobile: sticky stacking overlay cards ── */}
-      {!isDesktop && (
-        <div className="relative flex flex-col pb-4">
-          {experiences.map((exp, idx) => (
-            <div
-              key={exp.id}
-              style={{
-                top: `calc(4.5rem + ${idx * 1.5}rem)`,
-                zIndex: (idx + 1) * 10,
-                marginBottom: idx === experiences.length - 1 ? '0' : '2.5rem',
-              }}
-              className="sticky will-change-transform"
-            >
-              <ExperienceCard exp={exp} />
-            </div>
-          ))}
-        </div>
-      )}
+      {/* ── Sticky Stacking Overlay Cards Deck ── */}
+      <div className="relative max-w-4xl mx-auto flex flex-col pt-2 pb-8">
+        {experiences.map((exp, idx) => (
+          <div
+            key={exp.id}
+            style={{
+              top: `calc(5.5rem + ${idx * 28}px)`,
+              zIndex: idx + 10,
+              marginBottom: idx === experiences.length - 1 ? '0' : '6rem',
+            }}
+            className="sticky will-change-transform"
+          >
+            <ExperienceCard exp={exp} index={idx} total={experiences.length} />
+          </div>
+        ))}
+      </div>
     </section>
   );
 };
